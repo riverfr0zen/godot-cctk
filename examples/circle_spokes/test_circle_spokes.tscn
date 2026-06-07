@@ -1,16 +1,21 @@
 [gd_scene format=3 uid="uid://bomt50m7kkrsv"]
 
 [ext_resource type="PackedScene" uid="uid://cg743lvqmle5v" path="res://examples/circle_spokes/circle_spokes.tscn" id="1_sbr3p"]
-[ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://examples/circle_spokes/grid_manager.gd" id="2_y61y4"]
+[ext_resource type="Script" uid="uid://16gk0r840rpj" path="res://examples/circle_spokes/test_circle_spokes.gd" id="1_vyl1f"]
+[ext_resource type="PackedScene" uid="uid://d21aqfukeag7e" path="res://grid_manager.tscn" id="2_y61y4"]
 
 [node name="TestCircleSpokes" type="Node" unique_id=700898232]
+script = ExtResource("1_vyl1f")
 
 [node name="CircleSpokes" parent="." unique_id=1295757499 instance=ExtResource("1_sbr3p")]
+visible = false
 scale = Vector2(0.5, 0.5)
 
 [node name="CircleSpokes2" parent="." unique_id=1258930053 instance=ExtResource("1_sbr3p")]
+visible = false
 position = Vector2(300, 0)
 scale = Vector2(0.75, 0.5)
 
-[node name="GridManager" type="Node2D" parent="." unique_id=252152729]
-script = ExtResource("2_y61y4")
+[node name="GridManager" parent="." unique_id=1471408387 instance=ExtResource("2_y61y4")]
+cell_scene = ExtResource("1_sbr3p")
+hide_grid = true

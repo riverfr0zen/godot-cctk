@@ -5,9 +5,11 @@ extends Node2D
 
 func _ready() -> void:
     var origin = rect.get_center()
-    var inner_circle = get_circle_points(origin, 20, 50)
-    #var outer_circle = get_circle_points(origin, 20, rect.size.y * 0.5)
-    var outer_circle = get_circle_points(origin, 20, rect.size.y * 0.5, 0.8, 1.0)
+    var inner_circle = get_circle_points(origin, 30, 50)
+    #var inner_circle = get_circle_points(origin, 30, 50, 1.0, 1.5)
+    #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5)
+    var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.8, 1.0)
+    #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.4, 1.0)
     for pos in range(inner_circle.size()):
         var spoke = Line2D.new()
         spoke.default_color = Color.RED

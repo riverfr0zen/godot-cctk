@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d21aqfukeag7e"]
+
+[ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://grid_manager.gd" id="1_j4by3"]
+
+[node name="GridManager" type="Node2D" unique_id=1471408387]
+script = ExtResource("1_j4by3")
+hide_grid = null

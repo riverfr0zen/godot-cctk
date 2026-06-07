@@ -2,6 +2,7 @@
 class_name GridManager
 extends Node2D
 
+
 @export var size := Vector2(800, 600):
     set(value):
         size = value
@@ -18,17 +19,12 @@ extends Node2D
     set(value): 
         line_size = value
         update_display_line_sizes()
-## NOTE: If GridManager is instantiated as a child scene, you can access the
-## included instance of GridDisplay by right-clicking the instantiated 
-## GridManager in the scene tree and enabling "Editable Children"
-#@export var display : GridDisplay:
-    #set(value):
-        #if value and display:
-            #print("Free previous display")
-            #display.queue_free()
-        #display = value
-        #update_display_alpha()
+@export var cell_scene : PackedScene
+## Hides the grid *in game only*. Will still display in editor.
+@export var hide_grid := false
+
 var display : GridDisplay
+var cell_nodes := []
 
 func _ready() -> void:
     display = GridDisplay.new()
@@ -38,6 +34,19 @@ func _ready() -> void:
     update_display_line_sizes()
     update_display_alpha()
     update_display_size()
+
+    if cell_scene:
+        #print(cell_scene.resource_path)
+        for j in range(int(grid_size.y)):
+            for i in range(int(grid_size.x)):
+                var cell_scene_inst = cell_scene.instantiate()
+                cell_scene_inst.position = get_cell_local_pos(Vector2i(i, j))
+                cell_scene_inst.scale =  display.cell_size / cell_scene_inst.rect.size
+                add_child(cell_scene_inst)
+                cell_nodes.append(cell_scene_inst)
+
+    if hide_grid and not Engine.is_editor_hint():
+        display.hide()
 
 func update_display_size():
     if display:
