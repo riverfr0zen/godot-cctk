@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bomt50m7kkrsv"]
 
 [ext_resource type="PackedScene" uid="uid://cg743lvqmle5v" path="res://examples/circle_spokes/circle_spokes.tscn" id="1_sbr3p"]
+[ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://examples/circle_spokes/grid_manager.gd" id="2_y61y4"]
 
 [node name="TestCircleSpokes" type="Node" unique_id=700898232]
 
@@ -10,3 +11,6 @@ scale = Vector2(0.5, 0.5)
 [node name="CircleSpokes2" parent="." unique_id=1258930053 instance=ExtResource("1_sbr3p")]
 position = Vector2(300, 0)
 scale = Vector2(0.75, 0.5)
+
+[node name="GridManager" type="Node2D" parent="." unique_id=252152729]
+script = ExtResource("2_y61y4")
