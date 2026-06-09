@@ -16,11 +16,43 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("common.restart"):
         reinit()
+    if event.is_action_pressed("common.toggle_hud"):
+        toggle_hud()
 
 func _process(_delta: float) -> void:
+    move_inhibitors()
+
+func toggle_hud() -> void:
+    if $Hud.visible:
+        $Hud.hide()
+    else:
+        $Hud.show()
+    $GridManager.hide_grid = !$GridManager.hide_grid
+
+func move_inhibitors() -> void:
     for i in range(inhibitors.size()):
-        if !$GridManager.display.rect.has_point($GridManager.display.to_local(inhibitors[i])):
-            inhibitors_mv[i] = Vector2(-inhibitors_mv[i].x, -inhibitors_mv[i].y)           
+        var rect = $GridManager.display.rect
+        var local_pos = $GridManager.display.to_local(inhibitors[i])
+
+        if local_pos.x <= rect.position.x:
+            local_pos.x = rect.position.x                 # Snap to edge
+            inhibitors_mv[i].x = -inhibitors_mv[i].x             # Bounce X
+        elif local_pos.x >= rect.end.x:
+            local_pos.x = rect.end.x                     # Snap to edge
+            inhibitors_mv[i].x = -inhibitors_mv[i].x             # Bounce X
+
+        # --- Check Y boundaries (Top and Bottom Walls) ---
+        if local_pos.y <= rect.position.y:
+            local_pos.y = rect.position.y                 # Snap to edge
+            inhibitors_mv[i].y = -inhibitors_mv[i].y             # Bounce Y
+        elif local_pos.y >= rect.end.y:
+            local_pos.y = rect.end.y                     # Snap to edge
+            inhibitors_mv[i].y = -inhibitors_mv[i].y             # Bounce Y
+        inhibitors[i] = $GridManager.display.to_global(local_pos)
+
+        #if !$GridManager.display.rect.has_point($GridManager.display.to_local(inhibitors[i])):
+            #inhibitors_mv[i] = Vector2(-inhibitors_mv[i].x, -inhibitors_mv[i].y)           
+
         inhibitors[i] = inhibitors[i] + inhibitors_mv[i]
 
 func get_random_direction() -> Vector2:
@@ -33,7 +65,7 @@ func reinit() -> void:
         #sketch.draw_spokes()
         sketch.reset_spokes()
     
-    var inhibitor_range = randf_range(inhibitor_range_min, inhibitor_range_max)
+    var inhibitor_range := randf_range(inhibitor_range_min, inhibitor_range_max)
     print("Inhibitor range: ", inhibitor_range)
     $GridManager.set_cells_prop("inhibitor_range", inhibitor_range)
     inhibitors = []

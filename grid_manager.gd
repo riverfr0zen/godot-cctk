@@ -45,8 +45,12 @@ func _ready() -> void:
                 add_child(cell_scene_inst)
                 cell_nodes.append(cell_scene_inst)
 
+
+func _process(_delta: float) -> void:
     if hide_grid and not Engine.is_editor_hint():
         display.hide()
+    else:
+        display.show()
 
 func update_display_size():
     if display:

@@ -22,4 +22,5 @@ cell_scene = ExtResource("1_sbr3p")
 hide_grid = true
 
 [node name="Hud" type="Node2D" parent="." unique_id=1517509003]
+visible = false
 script = ExtResource("4_agor6")
