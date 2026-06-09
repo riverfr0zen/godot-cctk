@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _draw() -> void:
-    for inhibitor in get_parent().inhibitors:
+    for inhibitor in get_parent().points_field.positions:
         draw_circle(inhibitor, 5, Color.BLUE)
         pass
 
