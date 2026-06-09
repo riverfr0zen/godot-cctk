@@ -1,22 +1,58 @@
 extends Node2D
 
 @export var rect := Rect2(Vector2(0, 0), Vector2(300, 300))
-
+@export var inhibitors : Array[Vector2]
+@export var inhibitor_range = 100
+## Lower it (e.g., 0.5) for weaker inhibitors
+@export var shortening_mod = 1.0
+var spokes : Array[Line2D]
+var spokes_mem : Array[Vector2]
 
 func _ready() -> void:
     var origin = rect.get_center()
     var inner_circle = get_circle_points(origin, 30, 50)
     #var inner_circle = get_circle_points(origin, 30, 50, 1.0, 1.5)
     #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5)
-    var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.8, 1.0)
+    var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.9, 1.0)
     #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.4, 1.0)
     for pos in range(inner_circle.size()):
         var spoke = Line2D.new()
         spoke.default_color = Color.RED
         spoke.add_point(inner_circle[pos])
         spoke.add_point(outer_circle[pos])
+        spokes.append(spoke)
+        spokes_mem.append(outer_circle[pos])
         add_child(spoke)
 
+    inhibitors = [Vector2(200, 300), Vector2(0, 150)]
+
+func _process(_delta: float) -> void:
+    for spoke_point_i in range(spokes_mem.size()):
+        var nearest_inhibitor_distance := -1.0
+        #print(spoke_point)
+        for inhibitor in inhibitors:
+            var distance = spokes_mem[spoke_point_i].distance_to(inhibitor)
+            if nearest_inhibitor_distance < 0 or distance < nearest_inhibitor_distance:
+                nearest_inhibitor_distance = distance
+        if nearest_inhibitor_distance <= inhibitor_range and nearest_inhibitor_distance >= 0:
+            var center_point = spokes[spoke_point_i].points[0]
+            var curr_spoke_len = center_point.distance_to(spokes_mem[spoke_point_i])
+            
+            # Map the distance to a 0.0 -> 1.0 push factor.
+            # If inhibitor is right on top (0), push_factor is 1.0 (max shrinkage).
+            # If inhibitor is at the edge of range, push_factor is 0.0 (no shrinkage).
+            var push_factor = remap(nearest_inhibitor_distance, 0.0, inhibitor_range, 1.0, 0.0)
+            
+            # Decide the maximum amount a spoke can possibly shrink (e.g., its full length, or a set max)
+            var max_shrink_amount = curr_spoke_len 
+            
+            # Calculate new length and safely clamp it between 0 and the original length
+            var reduction = max_shrink_amount * push_factor * shortening_mod
+            var new_spoke_len = clampf(curr_spoke_len - reduction, 0.0, curr_spoke_len)
+            
+            # Update the line point
+            var direction = center_point.direction_to(spokes_mem[spoke_point_i])
+            spokes[spoke_point_i].points[1] = center_point + (direction * new_spoke_len)
 
 func get_circle_points(origin: Vector2, count: int, rad: float, rad_mod_low := 1.0, rad_mod_high := 1.0) -> Array[Vector2]:
     var result: Array[Vector2] = []
