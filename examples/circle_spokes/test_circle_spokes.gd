@@ -10,7 +10,7 @@ func _ready() -> void:
 
     # Center the grid
     $GridManager.global_position = get_viewport().get_visible_rect().size * 0.5 - ($GridManager.size / 2)
-    points_field = MovingPointsField.new(Rect2($GridManager.position, $GridManager.size))
+    points_field = MovingPointsField.new($GridManager.display.rect)
     reinit()
 
 func _unhandled_input(event: InputEvent) -> void:
