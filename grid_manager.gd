@@ -28,8 +28,8 @@ var cell_nodes := []
 
 func _ready() -> void:
     display = GridDisplay.new()
-    display.grid_size = Vector2(10, 10)
-    display.cell_size = Vector2(10, 10)
+    #display.grid_size = Vector2(10, 10)
+    #display.cell_size = Vector2(10, 10)
     add_child(display)
     update_display_line_sizes()
     update_display_alpha()
@@ -78,3 +78,7 @@ func get_cell_center(pos: Vector2) -> Vector2:
 
 func display_has_point(cell_grid_pos: Vector2i) -> bool:
     return Rect2(Vector2.ZERO, display.grid_size).has_point(cell_grid_pos)
+
+func set_cells_prop(prop: String, value: Variant):
+    for cell in cell_nodes:
+        cell.set(prop, value)

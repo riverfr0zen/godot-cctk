@@ -1,14 +1,25 @@
 extends Node2D
 
 @export var rect := Rect2(Vector2(0, 0), Vector2(300, 300))
-@export var inhibitors : Array[Vector2]
-@export var inhibitor_range = 100
+@export var inhibitors : Array[Vector2] = [Vector2(200, 300), Vector2(0, 150)]
+@export var inhibitor_range := 100.0
 ## Lower it (e.g., 0.5) for weaker inhibitors
-@export var shortening_mod = 1.0
+@export var shortening_mod := 1.0
 var spokes : Array[Line2D]
 var spokes_mem : Array[Vector2]
 
+
 func _ready() -> void:
+    draw_spokes()
+
+func _process(_delta: float) -> void:
+    update_spokes_len()
+
+func draw_spokes() -> void:
+    for spoke in spokes:
+        spoke.queue_free()
+    spokes = []
+    spokes_mem = []
     var origin = rect.get_center()
     var inner_circle = get_circle_points(origin, 30, 50)
     #var inner_circle = get_circle_points(origin, 30, 50, 1.0, 1.5)
@@ -24,13 +35,16 @@ func _ready() -> void:
         spokes_mem.append(outer_circle[pos])
         add_child(spoke)
 
-    inhibitors = [Vector2(200, 300), Vector2(0, 150)]
 
-func _process(_delta: float) -> void:
+func update_spokes_len() -> void:
+    var local_inhibitors: Array[Vector2] = []
+    for global_pos in inhibitors:
+        local_inhibitors.append(to_local(global_pos))
+
     for spoke_point_i in range(spokes_mem.size()):
         var nearest_inhibitor_distance := -1.0
         #print(spoke_point)
-        for inhibitor in inhibitors:
+        for inhibitor in local_inhibitors:
             var distance = spokes_mem[spoke_point_i].distance_to(inhibitor)
             if nearest_inhibitor_distance < 0 or distance < nearest_inhibitor_distance:
                 nearest_inhibitor_distance = distance
@@ -50,9 +64,13 @@ func _process(_delta: float) -> void:
             var reduction = max_shrink_amount * push_factor * shortening_mod
             var new_spoke_len = clampf(curr_spoke_len - reduction, 0.0, curr_spoke_len)
             
-            # Update the line point
+            # 4. Update the line point
             var direction = center_point.direction_to(spokes_mem[spoke_point_i])
             spokes[spoke_point_i].points[1] = center_point + (direction * new_spoke_len)
+
+func reset_spokes() -> void:
+    for spoke_i in range(spokes.size()):
+        spokes[spoke_i].points[1] = spokes_mem[spoke_i]
 
 func get_circle_points(origin: Vector2, count: int, rad: float, rad_mod_low := 1.0, rad_mod_high := 1.0) -> Array[Vector2]:
     var result: Array[Vector2] = []
