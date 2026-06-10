@@ -10,12 +10,12 @@ func _init(p_rect: Rect2) -> void:
     rect = p_rect
 
 
-func get_random_direction() -> Vector2:
+func get_random_direction(min_speed: float, max_speed: float) -> Vector2:
     var dir := Vector2.from_angle(randf() * TAU)
-    dir = dir * Vector2(randf_range(0.1, 5.0), randf_range(0.1, 5.0))
+    dir = dir * Vector2(randf_range(min_speed, max_speed), randf_range(min_speed, max_speed))
     return dir
 
-func gen_random(max: int) -> void:
+func gen_random(max: int, min_speed: float = 1.0, max_speed: float = 1.0) -> void:
     positions = []
     directions = []
     for i in range(max):
@@ -24,7 +24,7 @@ func gen_random(max: int) -> void:
                 randf_range(rect.position.x, rect.position.x + rect.size.x),
                 randf_range(rect.position.y, rect.position.y + rect.size.y)
             ))
-            directions.append(get_random_direction())
+            directions.append(get_random_direction(min_speed, max_speed))
 
 # Moves points 1 step according to their directions, bouncing them if they hit a `rect` wall
 func bounce_step(local_obj: Variant, rect: Rect2) -> void:

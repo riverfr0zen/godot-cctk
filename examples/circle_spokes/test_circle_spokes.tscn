@@ -8,15 +8,6 @@
 [node name="TestCircleSpokes" type="Node" unique_id=494654468]
 script = ExtResource("1_vyl1f")
 
-[node name="CircleSpokes" parent="." unique_id=1295757499 instance=ExtResource("1_sbr3p")]
-visible = false
-scale = Vector2(0.5, 0.5)
-
-[node name="CircleSpokes2" parent="." unique_id=1258930053 instance=ExtResource("1_sbr3p")]
-visible = false
-position = Vector2(300, 0)
-scale = Vector2(0.75, 0.5)
-
 [node name="GridManager" parent="." unique_id=1471408387 instance=ExtResource("2_y61y4")]
 cell_scene = ExtResource("1_sbr3p")
 hide_grid = true

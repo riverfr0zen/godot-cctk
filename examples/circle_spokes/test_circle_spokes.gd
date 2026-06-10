@@ -3,6 +3,8 @@ extends Node
 @export var max_inhibitors := 10
 @export var inhibitor_range_min := 100.0
 @export var inhibitor_range_max := 200.0
+@export var inhibitor_speed_min := 0.1
+@export var inhibitor_speed_max := 5.0
 var points_field : MovingPointsField
 
 func _ready() -> void:
@@ -37,7 +39,7 @@ func reinit() -> void:
     var inhibitor_range := randf_range(inhibitor_range_min, inhibitor_range_max)
     print("Inhibitor range: ", inhibitor_range)
     $GridManager.set_cells_prop("inhibitor_range", inhibitor_range)
-    points_field.gen_random(max_inhibitors)
+    points_field.gen_random(max_inhibitors, inhibitor_speed_min, inhibitor_speed_max)
     print("Inhibitors: ", points_field.positions.size())
     
     for sketch in $GridManager.cell_nodes:
