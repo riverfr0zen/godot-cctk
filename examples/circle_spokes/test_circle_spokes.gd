@@ -33,8 +33,8 @@ func toggle_hud() -> void:
 
 func reinit() -> void:
     for sketch in $GridManager.cell_nodes:
-        #sketch.draw_spokes()
-        sketch.reset_spokes()
+        sketch.draw_spokes()
+        #sketch.reset_spokes()
     
     var inhibitor_range := randf_range(inhibitor_range_min, inhibitor_range_max)
     print("Inhibitor range: ", inhibitor_range)

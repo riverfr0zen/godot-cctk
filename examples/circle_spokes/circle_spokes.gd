@@ -2,10 +2,15 @@ extends Node2D
 
 const INNER = 0
 const OUTER = 1
+const CLR_MAX = 1.2
+const CLR_MIN = 0.2
 
 @export var rect := Rect2(Vector2(0, 0), Vector2(300, 300))
 @export var inhibitors : Array[Vector2] = [Vector2(200, 300), Vector2(0, 150)]
 @export var inhibitor_range := 100.0
+@export var main_color := Color.RED
+@export var second_color := Color.ORANGE
+@export var third_color := Color.VIOLET
 ## Lower it (e.g., 0.5) for weaker inhibitors
 @export var shortening_mod := 1.0
 var spokes : Array[Line2D]
@@ -17,6 +22,18 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
     update_spokes_len()
+
+func choose_color() -> Color:
+    var chosen : Color
+    var choice = randi_range(0, 10)
+    if choice >= 0 and choice < 8:
+        chosen = main_color
+    elif choice >= 8 and choice < 10:
+        chosen = second_color
+    else:
+        chosen = third_color
+    var intensity_mod = randf_range(CLR_MIN, CLR_MAX)
+    return chosen * Color(intensity_mod, intensity_mod, intensity_mod, 1.0)
 
 func draw_spokes() -> void:
     for spoke in spokes:
@@ -31,7 +48,7 @@ func draw_spokes() -> void:
     #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.4, 1.0)
     for pos in range(inner_circle.size()):
         var spoke = Line2D.new()
-        spoke.default_color = Color.RED
+        spoke.default_color = choose_color()
         spoke.add_point(inner_circle[pos])
         spoke.add_point(outer_circle[pos])
         spokes.append(spoke)
