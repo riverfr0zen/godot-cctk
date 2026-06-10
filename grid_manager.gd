@@ -86,3 +86,6 @@ func display_has_point(cell_grid_pos: Vector2i) -> bool:
 func set_cells_prop(prop: String, value: Variant):
     for cell in cell_nodes:
         cell.set(prop, value)
+
+func position_center():
+    global_position = get_viewport().get_visible_rect().size * 0.5 - (size / 2)

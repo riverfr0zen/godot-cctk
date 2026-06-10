@@ -15,7 +15,7 @@ func _ready() -> void:
     RenderingServer.set_default_clear_color(Color("#001511"))
 
     # Center the grid
-    $GridManager.global_position = get_viewport().get_visible_rect().size * 0.5 - ($GridManager.size / 2)
+    $GridManager.position_center()
     points_field = MovingPointsField.new($GridManager.display.rect)
     reinit()
 
