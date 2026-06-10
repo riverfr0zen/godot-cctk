@@ -2,10 +2,13 @@ extends Node2D
 
 const INNER = 0
 const OUTER = 1
-const CLR_MAX = 1.2
+const CLR_MAX = 1.5
 const CLR_MIN = 0.2
+const WIDTH_MIN = 1.0
+const WIDTH_MAX = 10.0
 
 @export var rect := Rect2(Vector2(0, 0), Vector2(300, 300))
+@export var density := 30
 @export var inhibitors : Array[Vector2] = [Vector2(200, 300), Vector2(0, 150)]
 @export var inhibitor_range := 100.0
 @export var main_color := Color.RED
@@ -41,14 +44,15 @@ func draw_spokes() -> void:
     spokes = []
     spokes_mem = []
     var origin = rect.get_center()
-    var inner_circle = get_circle_points(origin, 30, 50)
+    var inner_circle = get_circle_points(origin, density, 50)
     #var inner_circle = get_circle_points(origin, 30, 50, 1.0, 1.5)
     #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5)
-    var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.9, 1.0)
+    var outer_circle = get_circle_points(origin, density, rect.size.y * 0.5, 0.9, 1.0)
     #var outer_circle = get_circle_points(origin, 30, rect.size.y * 0.5, 0.4, 1.0)
     for pos in range(inner_circle.size()):
         var spoke = Line2D.new()
         spoke.default_color = choose_color()
+        spoke.width = randf_range(WIDTH_MIN, WIDTH_MAX)
         spoke.add_point(inner_circle[pos])
         spoke.add_point(outer_circle[pos])
         spokes.append(spoke)

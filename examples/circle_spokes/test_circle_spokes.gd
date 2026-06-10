@@ -5,10 +5,14 @@ extends Node
 @export var inhibitor_range_max := 200.0
 @export var inhibitor_speed_min := 0.1
 @export var inhibitor_speed_max := 5.0
+@export var density_min := 10
+@export var density_max := 100
 var points_field : MovingPointsField
 
+
 func _ready() -> void:
-    #RenderingServer.set_default_clear_color(Color.WEB_GRAY)
+    #RenderingServer.set_default_clear_color(Color.DARK_SLATE_GRAY)
+    RenderingServer.set_default_clear_color(Color("#001511"))
 
     # Center the grid
     $GridManager.global_position = get_viewport().get_visible_rect().size * 0.5 - ($GridManager.size / 2)
@@ -32,6 +36,9 @@ func toggle_hud() -> void:
     $GridManager.hide_grid = !$GridManager.hide_grid
 
 func reinit() -> void:
+    var density = randi_range(density_min, density_max)
+    print("Density: ", density)
+    $GridManager.set_cells_prop("density", density)
     for sketch in $GridManager.cell_nodes:
         sketch.draw_spokes()
         #sketch.reset_spokes()
