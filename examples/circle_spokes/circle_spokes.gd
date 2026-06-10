@@ -59,6 +59,20 @@ func draw_spokes() -> void:
         spokes_mem.append(outer_circle[pos])
         add_child(spoke)
 
+func get_circle_points(origin: Vector2, count: int, rad: float, rad_mod_low := 1.0, rad_mod_high := 1.0) -> Array[Vector2]:
+    var result: Array[Vector2] = []
+    
+    for i in range(count):
+        # Calculate angle in radians (TAU is 2 * PI, representing a full circle)
+        var angle = (i * TAU) / count
+
+        # 1. Calculate the point offset from center
+        var offset = Vector2(cos(angle), sin(angle)) * rad * randf_range(rad_mod_low, rad_mod_high)
+
+        # 2. Add the origin to shift the point to the right place
+        var point_position = origin + offset
+        result.append(point_position)
+    return result
 
 func update_spokes_len() -> void:
     var local_inhibitors: Array[Vector2] = []
@@ -95,18 +109,3 @@ func update_spokes_len() -> void:
 func reset_spokes() -> void:
     for spoke_i in range(spokes.size()):
         spokes[spoke_i].points[OUTER] = spokes_mem[spoke_i]
-
-func get_circle_points(origin: Vector2, count: int, rad: float, rad_mod_low := 1.0, rad_mod_high := 1.0) -> Array[Vector2]:
-    var result: Array[Vector2] = []
-    
-    for i in range(count):
-        # Calculate angle in radians (TAU is 2 * PI, representing a full circle)
-        var angle = (i * TAU) / count
-
-        # 1. Calculate the point offset from center
-        var offset = Vector2(cos(angle), sin(angle)) * rad * randf_range(rad_mod_low, rad_mod_high)
-
-        # 2. Add the origin to shift the point to the right place
-        var point_position = origin + offset
-        result.append(point_position)
-    return result
