@@ -7,10 +7,12 @@ extends Node2D
     set(value):
         size = value
         update_display_size()
+        populate_cell_scene_instances()
 @export var grid_size := Vector2(8, 6):
     set(value):
         grid_size = value
         update_display_size()
+        populate_cell_scene_instances()
 @export var alpha := 1.0:
     set(value): 
         alpha = value
@@ -34,16 +36,16 @@ func _ready() -> void:
     update_display_line_sizes()
     update_display_alpha()
     update_display_size()
-
-    if cell_scene:
-        #print(cell_scene.resource_path)
-        for j in range(int(grid_size.y)):
-            for i in range(int(grid_size.x)):
-                var cell_scene_inst = cell_scene.instantiate()
-                cell_scene_inst.position = get_cell_local_pos(Vector2i(i, j))
-                cell_scene_inst.scale =  display.cell_size / cell_scene_inst.rect.size
-                add_child(cell_scene_inst)
-                cell_nodes.append(cell_scene_inst)
+    populate_cell_scene_instances()
+    #if cell_scene:
+        ##print(cell_scene.resource_path)
+        #for j in range(int(grid_size.y)):
+            #for i in range(int(grid_size.x)):
+                #var cell_scene_inst = cell_scene.instantiate()
+                #cell_scene_inst.position = get_cell_local_pos(Vector2i(i, j))
+                #cell_scene_inst.scale =  display.cell_size / cell_scene_inst.rect.size
+                #add_child(cell_scene_inst)
+                #cell_nodes.append(cell_scene_inst)
 
 
 func _process(_delta: float) -> void:
@@ -82,6 +84,20 @@ func get_cell_center(pos: Vector2) -> Vector2:
 
 func display_has_point(cell_grid_pos: Vector2i) -> bool:
     return Rect2(Vector2.ZERO, display.grid_size).has_point(cell_grid_pos)
+
+func populate_cell_scene_instances():
+    for cell_scene_inst in cell_nodes:
+        cell_scene_inst.queue_free()
+    cell_nodes.clear()
+    if cell_scene:
+        #print(cell_scene.resource_path)
+        for j in range(int(grid_size.y)):
+            for i in range(int(grid_size.x)):
+                var cell_scene_inst = cell_scene.instantiate()
+                cell_scene_inst.position = get_cell_local_pos(Vector2i(i, j))
+                cell_scene_inst.scale =  display.cell_size / cell_scene_inst.rect.size
+                add_child(cell_scene_inst)
+                cell_nodes.append(cell_scene_inst)
 
 func set_cells_prop(prop: String, value: Variant):
     for cell in cell_nodes:

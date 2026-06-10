@@ -12,7 +12,11 @@ var points_field : MovingPointsField
 
 func _ready() -> void:
     #RenderingServer.set_default_clear_color(Color.DARK_SLATE_GRAY)
-    RenderingServer.set_default_clear_color(Color("#001511"))
+    RenderingServer.set_default_clear_color(Color("#102025"))
+
+    # GridManager can be resized programmatically
+    #$GridManager.size = Vector2(300, 300)
+    #$GridManager.grid_size = Vector2(4, 2)
 
     # Center the grid
     $GridManager.position_center()
