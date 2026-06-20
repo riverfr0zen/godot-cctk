@@ -87,7 +87,6 @@ func update_spokes_len() -> void:
             if nearest_inhibitor_distance < 0 or distance < nearest_inhibitor_distance:
                 nearest_inhibitor_distance = distance
         if nearest_inhibitor_distance <= inhibitor_range and nearest_inhibitor_distance >= 0:
-            print("here ", nearest_inhibitor_distance)
             var center_point = spokes[spoke_point_i].points[INNER]
             var curr_spoke_len = center_point.distance_to(spokes_mem[spoke_point_i])
             
