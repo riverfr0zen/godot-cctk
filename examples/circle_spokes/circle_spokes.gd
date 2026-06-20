@@ -87,6 +87,7 @@ func update_spokes_len() -> void:
             if nearest_inhibitor_distance < 0 or distance < nearest_inhibitor_distance:
                 nearest_inhibitor_distance = distance
         if nearest_inhibitor_distance <= inhibitor_range and nearest_inhibitor_distance >= 0:
+            print("here ", nearest_inhibitor_distance)
             var center_point = spokes[spoke_point_i].points[INNER]
             var curr_spoke_len = center_point.distance_to(spokes_mem[spoke_point_i])
             
@@ -104,8 +105,8 @@ func update_spokes_len() -> void:
             
             # Update the line point
             var direction = center_point.direction_to(spokes_mem[spoke_point_i])
-            spokes[spoke_point_i].points[OUTER] = center_point + (direction * new_spoke_len)
+            spokes[spoke_point_i].set_point_position(OUTER, center_point + (direction * new_spoke_len))
 
 func reset_spokes() -> void:
     for spoke_i in range(spokes.size()):
-        spokes[spoke_i].points[OUTER] = spokes_mem[spoke_i]
+        spokes[spoke_i].set_point_position(OUTER, spokes_mem[spoke_i])
