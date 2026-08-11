@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://e12bbs7eyqbs"]
+
+[ext_resource type="Script" uid="uid://dn80er64rliwe" path="res://examples/flow_field_exploration/test_noise_map.gd" id="1_xcvus"]
+[ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://grid_manager.gd" id="2_evm1n"]
+[ext_resource type="PackedScene" uid="uid://0nqg326h33yo" path="res://examples/flow_field_exploration/color_display.tscn" id="3_ab0ou"]
+
+[node name="TestNoiseMap" type="Node3D" unique_id=1671324480]
+script = ExtResource("1_xcvus")
+
+[node name="GridManager" type="Node2D" parent="." unique_id=477499507]
+script = ExtResource("2_evm1n")
+grid_size = Vector2(40, 30)
+line_size = 0.5
+cell_scene = ExtResource("3_ab0ou")
+metadata/_custom_type_script = "uid://bh44u80vd5xbg"
