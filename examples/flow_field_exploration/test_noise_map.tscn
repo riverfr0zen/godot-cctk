@@ -6,7 +6,6 @@
 
 [node name="TestNoiseMap" type="Node3D" unique_id=1671324480]
 script = ExtResource("1_xcvus")
-cell_alpha = 1.0
 
 [node name="GridManager" type="Node2D" parent="." unique_id=477499507]
 script = ExtResource("2_evm1n")
