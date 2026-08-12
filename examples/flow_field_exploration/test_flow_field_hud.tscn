@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://d1lkiokib8amn"]
 
-[ext_resource type="Script" uid="uid://bmm7d1f0femft" path="res://examples/flow_field_exploration/test_flow_field_noise.gd" id="1_45jnf"]
+[ext_resource type="Script" uid="uid://ddjdj608x28k" path="res://examples/flow_field_exploration/test_flow_field_hud.gd" id="1_jdbay"]
 [ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://grid_manager.gd" id="2_vfe16"]
-[ext_resource type="PackedScene" uid="uid://0nqg326h33yo" path="res://examples/flow_field_exploration/color_display.tscn" id="3_vfe16"]
+[ext_resource type="PackedScene" uid="uid://cepgcbh6ka1jc" path="res://examples/flow_field_exploration/hud_arrow.tscn" id="4_45jnf"]
 
 [node name="TestFlowFieldHud" type="Node2D" unique_id=576632498]
-script = ExtResource("1_45jnf")
+script = ExtResource("1_jdbay")
 
 [node name="GridManager" type="Node2D" parent="." unique_id=854931705]
 script = ExtResource("2_vfe16")
 grid_size = Vector2(40, 30)
-cell_scene = ExtResource("3_vfe16")
+line_size = 0.1
+cell_scene = ExtResource("4_45jnf")
 metadata/_custom_type_script = "uid://bh44u80vd5xbg"

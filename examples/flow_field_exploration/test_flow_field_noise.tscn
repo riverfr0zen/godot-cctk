@@ -3,20 +3,12 @@
 [ext_resource type="Script" uid="uid://bmm7d1f0femft" path="res://examples/flow_field_exploration/test_flow_field_noise.gd" id="1_668a4"]
 [ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://grid_manager.gd" id="2_051n4"]
 [ext_resource type="PackedScene" uid="uid://0nqg326h33yo" path="res://examples/flow_field_exploration/color_display.tscn" id="3_wcve2"]
-[ext_resource type="PackedScene" uid="uid://cepgcbh6ka1jc" path="res://examples/flow_field_exploration/arrow.tscn" id="4_eqker"]
 
-[node name="TestFlowFieldHud" type="Node2D" unique_id=576632498]
+[node name="TestFlowFieldNoise" type="Node2D" unique_id=576632498]
 script = ExtResource("1_668a4")
 
 [node name="GridManager" type="Node2D" parent="." unique_id=854931705]
-visible = false
 script = ExtResource("2_051n4")
 grid_size = Vector2(40, 30)
 cell_scene = ExtResource("3_wcve2")
-metadata/_custom_type_script = "uid://bh44u80vd5xbg"
-
-[node name="GridManager2" type="Node2D" parent="." unique_id=1842683494]
-script = ExtResource("2_051n4")
-grid_size = Vector2(40, 30)
-cell_scene = ExtResource("4_eqker")
 metadata/_custom_type_script = "uid://bh44u80vd5xbg"

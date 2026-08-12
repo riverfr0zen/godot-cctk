@@ -11,6 +11,8 @@ var frequency := 0.1:
     set(v):
         frequency = v
         if noise: noise.frequency =  v
+var curl_tightness := 1.0
+var normalize := true
 var img : Image
 
 func _init(p_size: Vector2):
@@ -29,10 +31,16 @@ func update(delta: float):
         int(size.y),
         1, # depth (we only need 1 slice for time)
         false, 
-        true # setting normalize to true can result in darker areas
+        normalize # setting normalize to true can result in more pronounced shifts
     )
     img = slices[0]
 
 func sample_noise(local_position: Vector2, scale := Vector2(1, 1)) -> float:
     var scale_pos = local_position / scale
     return img.get_pixel(int(scale_pos.x), int(scale_pos.y)).r
+
+func sample_vector(local_position: Vector2, scale := Vector2(1, 1)) -> Vector2:
+    var scale_pos = local_position / scale
+    var cval = img.get_pixel(int(scale_pos.x), int(scale_pos.y)).r
+    var angle: float = remap(cval, 0.0, 1.0, 0.0, TAU * curl_tightness)
+    return Vector2.from_angle(angle)

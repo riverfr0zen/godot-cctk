@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cepgcbh6ka1jc"]
-
-[ext_resource type="Texture2D" uid="uid://ya1aall1y16k" path="res://textures/arrow.500x500.png" id="1_j67lw"]
-
-[node name="Arrow" type="TextureRect" unique_id=468937030]
-texture = ExtResource("1_j67lw")
