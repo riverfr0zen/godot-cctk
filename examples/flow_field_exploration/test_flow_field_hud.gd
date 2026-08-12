@@ -8,6 +8,7 @@ func _ready() -> void:
     flow_field = FlowField2D.new($GridManager.grid_size / 2)
     flow_field.speed = 2
     flow_field.frequency = 0.05
+    #flow_field.normalize = false
     $GridManager.position_center()
     $GridManager.hide_grid = true
 
