@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 
 @export var animate := true
 @export var cell_alpha := 0.5
@@ -63,3 +63,7 @@ func _process(delta: float) -> void:
                 var cval = img.get_pixel(x, y).r
                 var cell = $GridManager.get_cell_at(x, y)
                 cell.color = Color(cval, cval, cval, cell_alpha)
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("common.toggle_hud"):
+        $GridManager.hide_grid = !$GridManager.hide_grid

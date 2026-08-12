@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://grid_manager.gd" id="2_evm1n"]
 [ext_resource type="PackedScene" uid="uid://0nqg326h33yo" path="res://examples/flow_field_exploration/color_display.tscn" id="3_ab0ou"]
 
-[node name="TestNoiseMap" type="Node3D" unique_id=1671324480]
+[node name="TestNoiseMap" type="Node2D" unique_id=717440205]
 script = ExtResource("1_xcvus")
 
 [node name="GridManager" type="Node2D" parent="." unique_id=477499507]
