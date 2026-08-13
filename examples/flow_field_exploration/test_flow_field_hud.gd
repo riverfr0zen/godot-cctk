@@ -21,3 +21,7 @@ func _process(delta: float) -> void:
             var angle_vec = flow_field.sample_vector(Vector2(x, y), Vector2(2, 2))
             var cell = $GridManager.get_cell_at(x, y)
             cell.rotation = angle_vec.angle()
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("common.restart"):
+        flow_field.reseed()

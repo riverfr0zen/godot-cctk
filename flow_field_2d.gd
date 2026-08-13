@@ -22,9 +22,12 @@ func _init(p_size: Vector2):
     size = p_size
     noise = FastNoiseLite.new()
     noise.noise_type = FastNoiseLite.TYPE_PERLIN
-    noise.seed = randi()
     noise.frequency = frequency
+    reseed()
     update(0.0)
+
+func reseed():
+    noise.seed = randi()    
 
 func update(delta: float):
     time += delta * speed
