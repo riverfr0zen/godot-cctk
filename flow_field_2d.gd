@@ -21,7 +21,8 @@ var img : Image
 func _init(p_size: Vector2):
     size = p_size
     noise = FastNoiseLite.new()
-    noise.noise_type = FastNoiseLite.TYPE_PERLIN
+    noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+    #noise.noise_type = FastNoiseLite.TYPE_PERLIN
     noise.frequency = frequency
     reseed()
     update(0.0)

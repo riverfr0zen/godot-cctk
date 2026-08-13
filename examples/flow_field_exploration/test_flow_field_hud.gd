@@ -1,5 +1,7 @@
 extends Node2D
 
+const FREQ_INC := 0.01
+
 var flow_field : FlowField2D
 
 func _ready() -> void:
@@ -25,3 +27,9 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("common.restart"):
         flow_field.reseed()
+    if event.is_action_pressed("ui_up"):
+        flow_field.frequency += FREQ_INC
+        print("frequency: %s" % flow_field.frequency)
+    if event.is_action_pressed("ui_down"):
+        flow_field.frequency -= FREQ_INC
+        print("frequency: %s" % flow_field.frequency)
