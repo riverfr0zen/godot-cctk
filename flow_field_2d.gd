@@ -33,8 +33,8 @@ func update(delta: float):
     time += delta * speed
     noise.offset = Vector3(0, 0, time)
     var slices: Array[Image] = noise.get_image_3d(
-        int(size.x),
-        int(size.y),
+        ceil(size.x),
+        ceil(size.y),
         1, # depth (we only need 1 slice for time)
         false, 
         normalize # setting normalize to true can result in more pronounced shifts
