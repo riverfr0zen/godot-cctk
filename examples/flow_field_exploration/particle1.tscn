@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c1dyowob6wh3d"]
+
+[ext_resource type="Texture2D" uid="uid://yvgq80xj7hxc" path="res://textures/emptywhite.png" id="1_nerxa"]
+
+[node name="Particle1" type="Sprite2D" unique_id=1188888002]
+scale = Vector2(8, 8)
+texture = ExtResource("1_nerxa")

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d0qxjvj4mo3b"]
+
+[ext_resource type="Script" uid="uid://cli51x0bg0bu2" path="res://examples/flow_field_exploration/test_flow_field_particles.gd" id="1_vna3v"]
+[ext_resource type="PackedScene" uid="uid://ndm8abcvi13x" path="res://examples/flow_field_exploration/flow_field_hud.tscn" id="2_2s4v5"]
+
+[node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
+script = ExtResource("1_vna3v")
+
+[node name="FlowFieldHud" parent="." unique_id=1522610477 instance=ExtResource("2_2s4v5")]
+visible = false
+size = Vector2(1152, 648)

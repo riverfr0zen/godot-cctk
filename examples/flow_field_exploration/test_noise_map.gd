@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
     if noise_method == "noise_3d" || noise_method == "noise_offset":
         for y in range($GridManager.grid_size.y):
             for x in range($GridManager.grid_size.x):
-                var cell = $GridManager.get_cell_at(x, y)
+                var cell = $GridManager.get_cell_at(y, x)
                 #var r = noise.get_noise_2d(float(x), float(y))
                 var r: float
                 if noise_method == "noise_3d":
@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
         for y in range($GridManager.grid_size.y):
             for x in range($GridManager.grid_size.x):
                 var cval = img.get_pixel(x, y).r
-                var cell = $GridManager.get_cell_at(x, y)
+                var cell = $GridManager.get_cell_at(y, x)
                 cell.color = Color(cval, cval, cval, cell_alpha)
 
     if noise_method == "get_image3d":
@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
         for y in range($GridManager.grid_size.y):
             for x in range($GridManager.grid_size.x):
                 var cval = img.get_pixel(x, y).r
-                var cell = $GridManager.get_cell_at(x, y)
+                var cell = $GridManager.get_cell_at(y, x)
                 cell.color = Color(cval, cval, cval, cell_alpha)
 
 func _unhandled_input(event: InputEvent) -> void:

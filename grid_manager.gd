@@ -86,6 +86,8 @@ func display_has_point(cell_grid_pos: Vector2i) -> bool:
     return Rect2(Vector2.ZERO, display.grid_size).has_point(cell_grid_pos)
 
 func populate_cell_scene_instances():
+    if !display:
+        return
     for cell_scene_inst in cell_nodes:
         cell_scene_inst.queue_free()
     cell_nodes.clear()
@@ -109,7 +111,7 @@ func set_cells_prop(prop: String, value: Variant):
         cell.set(prop, value)
 
 func get_cell_at(row: int, col: int):
-    var index = col * grid_size.x + row
+    var index = row * grid_size.x + col
     return cell_nodes[index]
 
 func position_center():

@@ -16,5 +16,5 @@ func _process(delta: float) -> void:
     for y in range($GridManager.grid_size.y):
         for x in range($GridManager.grid_size.x):
             var cval = flow_field.sample_noise(Vector2(x, y), Vector2(2, 2))
-            var cell = $GridManager.get_cell_at(x, y)
+            var cell = $GridManager.get_cell_at(y, x)
             cell.color = Color(cval, cval, cval)
