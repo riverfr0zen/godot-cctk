@@ -8,11 +8,13 @@ const FREQ_INC := 0.01
 @export var ff_frequency := 0.05
 @export var ff_curl := 1.0
 @export var ff_normalize := false
-@export var particle_size := 8.0
+@export var show_particles := true
+@export var particle_size := 4.0
 @export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
 @onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
 @onready var screen_size = get_viewport().get_visible_rect().size
+
 
 func _ready() -> void:
     flow_field = FlowField2D.new(flow_field_size)
@@ -30,8 +32,11 @@ func _process(delta: float) -> void:
     flow_field.update(delta)
     $FlowFieldHud.update()
     for p in get_tree().get_nodes_in_group("particles"):
+        p.visible = show_particles
         p.follow(flow_field)
         p.update()
+        # Prev positions are updated in the visualizer (ParticleTrails) after it's done drawing
+        #p.update_previous()
         p.handle_edges(screen_size)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -53,5 +58,6 @@ func generate_particles():
         pobj.scale = Vector2(particle_size, particle_size)
         pobj.global_position = Vector2(randf_range(0, screen.x), randf_range(0, screen.y))
         pobj.max_velocity = particle_max_velocity
+        pobj.visible = show_particles
         add_child(pobj)
         pobj.add_to_group("particles")
