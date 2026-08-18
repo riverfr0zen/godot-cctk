@@ -11,9 +11,12 @@ const FREQ_INC := 0.01
 @export var particle_speed := 2.0
 var flow_field : FlowField2D
 @onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
+@onready var screen_size = get_viewport().get_visible_rect().size
 
 func _ready() -> void:
     flow_field = FlowField2D.new(flow_field_size)
+    #flow_field.scale = screen / flow_field_size
+    flow_field.scale = ceil(screen_size / flow_field.size)
     flow_field.speed = ff_speed
     flow_field.frequency = ff_frequency
     flow_field.normalize = ff_normalize
@@ -25,11 +28,9 @@ func _process(delta: float) -> void:
     flow_field.update(delta)
     $FlowFieldHud.update()
     var screen = get_viewport().get_visible_rect().size
-    #var f_scale = screen / flow_field_size
-    var f_scale = ceil(screen / flow_field.size)
     for p in get_tree().get_nodes_in_group("particles"):
-        p.follow(flow_field, f_scale)
-        p.handle_edges(screen)
+        p.follow(flow_field)
+        p.handle_edges(screen_size)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("common.toggle_hud"):

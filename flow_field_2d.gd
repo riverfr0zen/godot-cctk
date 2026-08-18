@@ -1,6 +1,12 @@
 class_name FlowField2D
 extends RefCounted
 
+## The scale should be set against the main sketch size to simplify calls to `sample_vector`
+## or `sample_noise` for MOST callers.
+##
+## It can be overridden in those methods as necessary (for e.g. FlowFieldHud forces a `Vector2.ONE`
+## scale since it wants to draw the grid one to one with the flow field size).
+var scale: Vector2 = Vector2.ONE
 var size: Vector2
 var noise : FastNoiseLite
 var time := 0.0
@@ -42,12 +48,12 @@ func update(delta: float):
     )
     img = slices[0]
 
-func sample_noise(local_position: Vector2, scale := Vector2(1, 1)) -> float:
-    var scale_pos = local_position / scale
+func sample_noise(local_position: Vector2, p_scale := scale) -> float:
+    var scale_pos = local_position / p_scale
     return img.get_pixel(int(scale_pos.x), int(scale_pos.y)).r
 
-func sample_vector(local_position: Vector2, scale := Vector2(1, 1)) -> Vector2:
-    var scale_pos = local_position / scale
+func sample_vector(local_position: Vector2, p_scale := scale) -> Vector2:
+    var scale_pos = local_position / p_scale
     var cval = img.get_pixel(int(scale_pos.x), int(scale_pos.y)).r
     # Remap the color value to 0 -> 360 (TAU), modified by curl_tightness
     var angle: float = remap(cval, 0.0, 1.0, 0.0, TAU * curl_tightness)
