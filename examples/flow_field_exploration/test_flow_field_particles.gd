@@ -30,14 +30,7 @@ func _process(delta: float) -> void:
     for p in get_tree().get_nodes_in_group("particles"):
         var dir := flow_field.sample_vector(p.global_position, f_scale)
         p.global_position += dir * particle_speed
-        if p.global_position.x < 0:
-            p.global_position.x = screen.x
-        elif p.global_position.x > screen.x:
-            p.global_position.x = 0
-        if p.global_position.y < 0:
-            p.global_position.y = screen.y
-        elif p.global_position.y > screen.y:
-            p.global_position.y = 0
+        p.handle_edges(screen)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("common.toggle_hud"):
