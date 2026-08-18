@@ -6,6 +6,7 @@ const FREQ_INC := 0.01
 @export var flow_field_size := Vector2(40, 30)
 @export var ff_speed := 2
 @export var ff_frequency := 0.05
+@export var ff_curl := 1.0
 @export var ff_normalize := false
 @export var particle_size := 8.0
 @export var particle_max_velocity := 2.0
@@ -18,6 +19,7 @@ func _ready() -> void:
     flow_field.set_scale_for_size(screen_size)
     flow_field.speed = ff_speed
     flow_field.frequency = ff_frequency
+    flow_field.curl_tightness = ff_curl
     flow_field.normalize = ff_normalize
     $FlowFieldHud.position_center()
     $FlowFieldHud.flow_field = flow_field
