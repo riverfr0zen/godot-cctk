@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cepgcbh6ka1jc"]
 
-[ext_resource type="Texture2D" uid="uid://ya1aall1y16k" path="res://textures/arrow.500x500.png" id="1_heccm"]
+[ext_resource type="Texture2D" uid="uid://bvd0egel0am26" path="res://textures/arrow.500x500.white.png" id="1_heccm"]
 [ext_resource type="Script" uid="uid://bwdke6f1obj58" path="res://examples/flow_field_exploration/hud_arrow.gd" id="2_heccm"]
 
 [node name="Arrow" type="TextureRect" unique_id=468937030]

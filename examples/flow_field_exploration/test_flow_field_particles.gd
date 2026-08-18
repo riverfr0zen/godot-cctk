@@ -8,7 +8,7 @@ const FREQ_INC := 0.01
 @export var ff_frequency := 0.05
 @export var ff_normalize := false
 @export var particle_size := 8.0
-@export var particle_speed := 2.0
+@export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
 @onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
 @onready var screen_size = get_viewport().get_visible_rect().size
@@ -21,14 +21,15 @@ func _ready() -> void:
     flow_field.normalize = ff_normalize
     $FlowFieldHud.position_center()
     $FlowFieldHud.flow_field = flow_field
+    $FlowFieldHud.set_cells_prop("modulate", Color(0, 0, 1, 0.4))
     generate_particles()
 
 func _process(delta: float) -> void:
     flow_field.update(delta)
     $FlowFieldHud.update()
-    var screen = get_viewport().get_visible_rect().size
     for p in get_tree().get_nodes_in_group("particles"):
         p.follow(flow_field)
+        p.update()
         p.handle_edges(screen_size)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -49,6 +50,6 @@ func generate_particles():
         var pobj = particle_ps.instantiate()
         pobj.scale = Vector2(particle_size, particle_size)
         pobj.global_position = Vector2(randf_range(0, screen.x), randf_range(0, screen.y))
-        pobj.speed = particle_speed
+        pobj.max_velocity = particle_max_velocity
         add_child(pobj)
         pobj.add_to_group("particles")
