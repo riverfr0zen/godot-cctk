@@ -33,6 +33,9 @@ func _init(p_size: Vector2):
     reseed()
     update(0.0)
 
+func set_scale_for_size(p_size: Vector2):
+    scale = ceil(p_size / size)
+
 func reseed():
     noise.seed = randi()    
 

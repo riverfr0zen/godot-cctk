@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
     $FlowFieldHud.update()
 
 func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("common.toggle_hud"):
+        $FlowFieldHud.hide_grid = !$FlowFieldHud.hide_grid
     if event.is_action_pressed("common.restart"):
         flow_field.reseed()
     if event.is_action_pressed("ui_up"):

@@ -15,8 +15,7 @@ var flow_field : FlowField2D
 
 func _ready() -> void:
     flow_field = FlowField2D.new(flow_field_size)
-    #flow_field.scale = screen / flow_field_size
-    flow_field.scale = ceil(screen_size / flow_field.size)
+    flow_field.set_scale_for_size(screen_size)
     flow_field.speed = ff_speed
     flow_field.frequency = ff_frequency
     flow_field.normalize = ff_normalize
