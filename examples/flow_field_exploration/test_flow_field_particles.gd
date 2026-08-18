@@ -9,7 +9,7 @@ const FREQ_INC := 0.01
 @export var ff_curl := 1.0
 @export var ff_normalize := false
 @export var show_particles := true
-@export var particle_size := 8.0
+@export var particle_size := 4.0
 @export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
 @onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
