@@ -7,8 +7,8 @@ const FREQ_INC := 0.01
 @export var ff_speed := 2
 @export var ff_frequency := 0.05
 @export var ff_normalize := false
-@export var p_size := 8.0
-@export var p_speed := 2.0
+@export var particle_size := 8.0
+@export var particle_speed := 2.0
 var flow_field : FlowField2D
 @onready var particle_ps := preload("res://examples/flow_field_exploration/particle1.tscn") as PackedScene
 
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
     var f_scale = ceil(screen / flow_field.size)
     for p in get_tree().get_nodes_in_group("particles"):
         var dir := flow_field.sample_vector(p.global_position, f_scale)
-        p.global_position += dir * p_speed
+        p.global_position += dir * particle_speed
         if p.global_position.x < 0:
             p.global_position.x = screen.x
         elif p.global_position.x > screen.x:
@@ -55,7 +55,7 @@ func generate_particles():
     var screen = get_viewport().get_visible_rect().size
     for i in range(num_particles):
         var pobj = particle_ps.instantiate()
-        pobj.scale = Vector2(p_size, p_size)
+        pobj.scale = Vector2(particle_size, particle_size)
         pobj.global_position = Vector2(randf_range(0, screen.x), randf_range(0, screen.y))
         add_child(pobj)
         pobj.add_to_group("particles")
