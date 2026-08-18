@@ -6,7 +6,7 @@
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
-flow_field_size = Vector2(80, 60)
+bg_color = Color(0.98344463, 0.91165525, 0.60805315, 1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1923774794]
 custom_minimum_size = Vector2(1152, 648)
@@ -23,7 +23,6 @@ render_target_update_mode = 4
 
 [node name="ParticleTrails" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1427668603]
 script = ExtResource("3_66pp2")
-trail_color = Color(0.5304127, 0.18252683, 0.25823653, 1)
 
 [node name="FlowFieldHud" parent="." unique_id=1522610477 instance=ExtResource("2_2s4v5")]
 visible = false

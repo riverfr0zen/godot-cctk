@@ -2,6 +2,7 @@ extends Node2D
 
 const FREQ_INC := 0.01
 
+@export var bg_color := Color("#102025")
 @export var num_particles := 1000
 @export var flow_field_size := Vector2(40, 30)
 @export var ff_speed := 2
@@ -17,6 +18,8 @@ var flow_field : FlowField2D
 
 
 func _ready() -> void:
+    RenderingServer.set_default_clear_color(bg_color)
+
     flow_field = FlowField2D.new(flow_field_size)
     flow_field.set_scale_for_size(screen_size)
     flow_field.speed = ff_speed

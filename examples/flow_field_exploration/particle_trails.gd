@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var trail_color := Color(0.5, 0, 1, 1)
+@export var trail_color := Color("872f4233")
 @export var trail_width := 1.0
 
 func _process(_delta: float) -> void:
