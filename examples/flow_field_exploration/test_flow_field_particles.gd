@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
     for p in get_tree().get_nodes_in_group("particles"):
         p.follow(flow_field)
         p.update()
+        p.plot_line()
         p.handle_edges(screen_size)
 
 func _unhandled_input(event: InputEvent) -> void:
