@@ -6,6 +6,7 @@
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
+show_particles = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1923774794]
 custom_minimum_size = Vector2(1152, 648)
