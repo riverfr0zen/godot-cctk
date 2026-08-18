@@ -14,6 +14,7 @@ var flow_field : FlowField2D
 @onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
 @onready var screen_size = get_viewport().get_visible_rect().size
 
+
 func _ready() -> void:
     flow_field = FlowField2D.new(flow_field_size)
     flow_field.set_scale_for_size(screen_size)
@@ -32,6 +33,8 @@ func _process(delta: float) -> void:
     for p in get_tree().get_nodes_in_group("particles"):
         p.follow(flow_field)
         p.update()
+        # Prev positions are updated in the visualizer (ParticleTrails) after it's done drawing
+        #p.update_previous()
         p.handle_edges(screen_size)
 
 func _unhandled_input(event: InputEvent) -> void:

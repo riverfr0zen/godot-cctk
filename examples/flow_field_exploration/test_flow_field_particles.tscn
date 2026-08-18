@@ -2,9 +2,25 @@
 
 [ext_resource type="Script" uid="uid://cli51x0bg0bu2" path="res://examples/flow_field_exploration/test_flow_field_particles.gd" id="1_vna3v"]
 [ext_resource type="PackedScene" uid="uid://ndm8abcvi13x" path="res://examples/flow_field_exploration/flow_field_hud.tscn" id="2_2s4v5"]
+[ext_resource type="Script" uid="uid://dtxeu86bbfndx" path="res://examples/flow_field_exploration/particle_trails.gd" id="3_66pp2"]
 
 [node name="TestFlowFieldParticles" type="Node2D" unique_id=2048250178]
 script = ExtResource("1_vna3v")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1923774794]
+custom_minimum_size = Vector2(1152, 648)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=314189074]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="ParticleTrails" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1427668603]
+script = ExtResource("3_66pp2")
+trail_color = Color(0.5304127, 0.18252683, 0.25823653, 1)
 
 [node name="FlowFieldHud" parent="." unique_id=1522610477 instance=ExtResource("2_2s4v5")]
 visible = false
