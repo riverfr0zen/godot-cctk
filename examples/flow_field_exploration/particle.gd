@@ -1,5 +1,6 @@
 extends Sprite2D
 
+var speed := 0.0
 
 func handle_edges(p_size: Vector2):    
     if global_position.x < 0:
@@ -10,3 +11,7 @@ func handle_edges(p_size: Vector2):
         global_position.y = p_size.y
     elif global_position.y > p_size.y:
         global_position.y = 0
+
+func follow(flow_field: FlowField2D, flow_field_scale: Vector2):
+    var dir := flow_field.sample_vector(global_position, flow_field_scale)
+    global_position += dir * speed
