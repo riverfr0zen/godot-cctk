@@ -10,7 +10,7 @@ const FREQ_INC := 0.01
 @export var particle_size := 8.0
 @export var particle_speed := 2.0
 var flow_field : FlowField2D
-@onready var particle_ps := preload("res://examples/flow_field_exploration/particle1.tscn") as PackedScene
+@onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
 
 func _ready() -> void:
     flow_field = FlowField2D.new(flow_field_size)
