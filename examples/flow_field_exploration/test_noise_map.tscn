@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://e12bbs7eyqbs"]
 
 [ext_resource type="Script" uid="uid://dn80er64rliwe" path="res://examples/flow_field_exploration/test_noise_map.gd" id="1_xcvus"]
-[ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://grid_manager.gd" id="2_evm1n"]
+[ext_resource type="Script" uid="uid://bh44u80vd5xbg" path="res://addons/godot-cctk/grid_manager.gd" id="2_evm1n"]
 [ext_resource type="PackedScene" uid="uid://0nqg326h33yo" path="res://examples/flow_field_exploration/color_display.tscn" id="3_ab0ou"]
 
 [node name="TestNoiseMap" type="Node2D" unique_id=717440205]

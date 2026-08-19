@@ -14,7 +14,7 @@ const FREQ_INC := 0.01
 @export var particle_size := 4.0
 @export var particle_max_velocity := 2.0
 var flow_field : FlowField2D
-@onready var particle_ps := preload("res://examples/flow_field_exploration/particle.tscn") as PackedScene
+@onready var particle_ps := preload("res://addons/godot-cctk/flow_field/particle.tscn") as PackedScene
 @onready var screen_size = get_viewport().get_visible_rect().size
 
 
