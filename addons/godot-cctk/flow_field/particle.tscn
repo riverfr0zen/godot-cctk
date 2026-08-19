@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1dyowob6wh3d"]
 
 [ext_resource type="Texture2D" uid="uid://yvgq80xj7hxc" path="res://addons/godot-cctk/textures/emptywhite.png" id="1_gke5b"]
-[ext_resource type="Script" uid="uid://co4cgm6m3h83j" path="res://examples/flow_field_exploration/particle.gd" id="2_dq8vo"]
+[ext_resource type="Script" uid="uid://co4cgm6m3h83j" path="res://addons/godot-cctk/flow_field/particle.gd" id="2_dq8vo"]
 
 [node name="Particle" type="Sprite2D" unique_id=1188888002]
 scale = Vector2(8, 8)
