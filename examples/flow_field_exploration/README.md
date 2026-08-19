@@ -44,7 +44,17 @@ Demonstrates adding particles that move within the flow field. This follows fair
 
 * Particles follow the flow field
 
-* A ParticleTrails scene draws lines between particle positions. This scene or "visualizer" lives in a Subviewport that does not clear, so that it can persist the lines in a performant manner 
+* A ParticleTrails scene draws lines between particle positions. This scene or "visualizer" lives in a SubViewport that does not clear, so that it can persist the lines in a performant manner. 
+
+* The SubViewport and the TextureRect used to present the visualizer are configured to oversample the visualization, allowing for higher definition when the sketch window is maximized. See the following for details: 
+    * VisualizerViewport
+        * `size` set to the oversample size
+        * `size_2d_override` set to the normal size
+        * `size_2d_override_stretch` enabled
+    * VisualizerTexture
+        * `expand_mode` set to ignore size, so that the TextureRect won't expand with the larger (oversampled) viewport texture 
+        * `custom_minimum_size` set to the normal size
+
 
 * Real-time controls
     * Reseed the flow field (toggle with "r")
