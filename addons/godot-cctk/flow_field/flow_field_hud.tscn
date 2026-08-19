@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://ndm8abcvi13x"]
-
-[ext_resource type="Script" uid="uid://dw6hey355he24" path="res://addons/godot-cctk/flow_field/flow_field_hud.gd" id="1_snt7u"]
-[ext_resource type="PackedScene" uid="uid://cepgcbh6ka1jc" path="res://addons/godot-cctk/flow_field/hud_arrow.tscn" id="2_6osfw"]
-
-[node name="FlowFieldHud" type="Node2D" unique_id=1522610477]
-script = ExtResource("1_snt7u")
-cell_scene = ExtResource("2_6osfw")
-hide_grid = true

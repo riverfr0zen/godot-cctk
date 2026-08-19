@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1lkiokib8amn"]
 
 [ext_resource type="Script" uid="uid://ddjdj608x28k" path="res://examples/flow_field_exploration/test_flow_field_hud.gd" id="1_jdbay"]
-[ext_resource type="PackedScene" uid="uid://ndm8abcvi13x" path="res://addons/godot-cctk/flow_field/flow_field_hud.tscn" id="4_7ndat"]
+[ext_resource type="PackedScene" uid="uid://ndm8abcvi13x" path="res://addons/godot_cctk/flow_field/flow_field_hud.tscn" id="4_7ndat"]
 
 [node name="TestFlowFieldHud" type="Node2D" unique_id=576632498]
 script = ExtResource("1_jdbay")
