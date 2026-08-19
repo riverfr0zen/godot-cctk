@@ -10,7 +10,7 @@ Caveats / disclaimers:
 
 * While flow fields in Godot are typically used for steering game objects, this is an exploration of flow fields used for creative coding. There are similarities, but expect differences owing to purpose.
 
-* The flow field and particles implementations here run on the CPU. I decided to do it this way to stay closer to the exploration material from Processing/p5.js examples, and to simplify ease of use for users when creating sketches. It's possible to optimize by using the GPU if higher performance is needed, but I didn't want to complicate the exploration. I may add GPU accelerated versions or alternatives in the future. Feel free to contribute!
+* The flow field and particles implementations here run on the CPU. I decided to do it this way to stay closer to the exploration material from Processing/p5.js examples, and to simplify ease of use for users when creating sketches with `GDScript`. It's possible to optimize by using the GPU if higher performance is needed, but I didn't want to complicate the exploration. I may add GPU accelerated versions or alternatives in the future. Feel free to contribute!
 
 
 # test_noise_map.tscn

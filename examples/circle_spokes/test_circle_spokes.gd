@@ -1,5 +1,6 @@
 extends Node
 
+@export var bg_color := Color("5b44c4")
 @export var max_inhibitors := 10
 @export var inhibitor_range_min := 100.0
 @export var inhibitor_range_max := 200.0
@@ -12,8 +13,9 @@ var points_field : MovingPointsField
 
 func _ready() -> void:
     #RenderingServer.set_default_clear_color(Color.DARK_SLATE_GRAY)
-    RenderingServer.set_default_clear_color(Color("#102025"))
+    #RenderingServer.set_default_clear_color(Color("#102025"))
     #RenderingServer.set_default_clear_color(Color.DIM_GRAY)
+    RenderingServer.set_default_clear_color(bg_color)
 
     # GridManager can be resized programmatically
     #$GridManager.size = Vector2(300, 300)

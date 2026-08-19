@@ -7,6 +7,7 @@
 
 [node name="TestCircleSpokes" type="Node" unique_id=494654468]
 script = ExtResource("1_vyl1f")
+bg_color = Color(0.3559772, 0.26834735, 0.7695911, 1)
 
 [node name="GridManager" parent="." unique_id=1471408387 instance=ExtResource("2_y61y4")]
 cell_scene = ExtResource("1_sbr3p")
