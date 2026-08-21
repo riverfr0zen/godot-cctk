@@ -53,11 +53,13 @@ func update(delta: float):
 
 func sample_noise(local_position: Vector2, p_scale := scale) -> float:
     var scale_pos = local_position / p_scale
-    return img.get_pixel(int(scale_pos.x), int(scale_pos.y)).r
+    # Clamp pixel coordinates to safe bounds [0, size - 1]
+    var xpos := clampi(int(scale_pos.x), 0, img.get_width() - 1)
+    var ypos := clampi(int(scale_pos.y), 0, img.get_height() - 1)
+    return img.get_pixel(xpos, ypos).r
 
 func sample_vector(local_position: Vector2, p_scale := scale) -> Vector2:
-    var scale_pos = local_position / p_scale
-    var cval = img.get_pixel(int(scale_pos.x), int(scale_pos.y)).r
+    var cval = sample_noise(local_position, p_scale)
     # Remap the color value to 0 -> 360 (TAU), modified by curl_tightness
     var angle: float = remap(cval, 0.0, 1.0, 0.0, TAU * curl_tightness)
     return Vector2.from_angle(angle)
