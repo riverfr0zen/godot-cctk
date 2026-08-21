@@ -57,11 +57,10 @@ func _unhandled_input(event: InputEvent) -> void:
         print("frequency: %s" % flow_field.frequency)
 
 func generate_particles():
-    var screen = get_viewport().get_visible_rect().size
     for i in range(num_particles):
         var pobj = particle_ps.instantiate()
         pobj.scale = Vector2(particle_size, particle_size)
-        pobj.global_position = Vector2(randf_range(0, screen.x), randf_range(0, screen.y))
+        pobj.global_position = Vector2(randf_range(0, screen_size.x), randf_range(0, screen_size.y))
         pobj.max_velocity = particle_max_velocity
         pobj.visible = show_particles
         pobj.modulate = particle_color
