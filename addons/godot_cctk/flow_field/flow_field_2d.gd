@@ -21,6 +21,7 @@ var frequency := 0.1:
 # This forces the vector to spin through two full rotations over the exact same spatial noise distance. 
 # Visually, this should make the flowing lines twist, spiral, and curl into much tighter, more chaotic whirlpools.
 var curl_tightness := 1.0
+var vector_modifier := Vector2.ONE
 var normalize := true
 var img : Image
 
@@ -62,4 +63,4 @@ func sample_vector(local_position: Vector2, p_scale := scale) -> Vector2:
     var cval = sample_noise(local_position, p_scale)
     # Remap the color value to 0 -> 360 (TAU), modified by curl_tightness
     var angle: float = remap(cval, 0.0, 1.0, 0.0, TAU * curl_tightness)
-    return Vector2.from_angle(angle)
+    return Vector2.from_angle(angle) * vector_modifier
