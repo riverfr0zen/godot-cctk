@@ -4,6 +4,7 @@ var max_velocity := 2.0
 var acc := Vector2.ZERO
 var velocity := Vector2.ZERO
 var previous_global_position : Vector2
+var force_modifier := Vector2.ONE
 
 func _ready():
     update_previous()
@@ -24,7 +25,7 @@ func handle_edges(p_size: Vector2):
 
 func follow(flow_field: FlowField2D):
     var force := flow_field.sample_vector(global_position)
-    apply_force(force)
+    apply_force(force * force_modifier)
 
 func apply_force(force: Vector2):
     acc += force
